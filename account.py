@@ -38,7 +38,7 @@ class Account:
 
         if amount > self.__account_balance or amount <= 0:
             return False
-        else:
+        elif amount > 0 and amount <= self.__account_balance:
             self.__account_balance -= amount
             return True
 

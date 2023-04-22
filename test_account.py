@@ -17,17 +17,26 @@ class Test:
         assert self.p2.get_balance() == 0
 
     def test_deposit(self):
-        assert self.p1.deposit(20) == True
+        assert self.p1.deposit(20.0) == True
+        assert self.p1.get_balance() == 20.0
         assert self.p1.deposit(0) == False
-        assert self.p1.deposit(-20) == False
-        assert self.p2.deposit(20) == True
+        assert self.p1.get_balance() == 20.0
+        assert self.p1.deposit(-20.0) == False
+        assert self.p1.get_balance() == 20.0
+        assert self.p2.deposit(20.0) == True
+        assert self.p2.get_balance() == 20.0
         assert self.p2.deposit(0) == False
+        assert self.p2.get_balance() == 20.0
         assert self.p2.deposit(-20) == False
+        assert self.p2.get_balance() == 20.0
 
     def test_withdraw(self):
-        assert self.p1.withdraw(20) == False
+        self.p1.deposit(20.0)
+        assert self.p1.withdraw(20) == True
+        assert self.p1.get_balance() == 0.0
         assert self.p1.withdraw(0) == False
         assert self.p1.withdraw(-20) == False
-        assert self.p2.withdraw(20) == False
+        self.p2.deposit(20.0)
+        assert self.p2.withdraw(20) == True
         assert self.p2.withdraw(0) == False
         assert self.p2.withdraw(-20) == False
